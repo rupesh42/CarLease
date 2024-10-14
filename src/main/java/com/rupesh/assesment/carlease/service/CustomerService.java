@@ -4,15 +4,14 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.rupesh.assesment.carlease.entity.CustomerEntity;
 import com.rupesh.assesment.carlease.repository.CustomerRepository;
-import com.rupesh.assesment.carlease.run.CustomerEntity;
 
 
 /**
- * CustomerService provides operations for managing customer entities.
- * This class includes methods for creating, retrieving, and listing customers.
- * It interacts with the CustomerRepository to perform database operations.
+ * CustomerService provides operations for managing customer entities. This class includes methods
+ * for creating, retrieving, and listing customers. It interacts with the CustomerRepository to
+ * perform database operations.
  * 
  * @author rupesh
  */
@@ -46,7 +45,7 @@ public class CustomerService {
     Optional<CustomerEntity> cust = custRepo.findCustomerByid(id);
     return cust.orElse(null);
   }
-  
+
   /**
    * Creates a new customer entity in the repository.
    *

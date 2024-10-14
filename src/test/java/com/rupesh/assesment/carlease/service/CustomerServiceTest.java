@@ -11,8 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import com.rupesh.assesment.carlease.entity.CustomerEntity;
 import com.rupesh.assesment.carlease.repository.CustomerRepository;
-import com.rupesh.assesment.carlease.run.CustomerEntity;
 
 @ExtendWith(MockitoExtension.class)
 public class CustomerServiceTest {

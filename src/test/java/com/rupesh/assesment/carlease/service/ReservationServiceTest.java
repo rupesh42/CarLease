@@ -15,8 +15,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import com.rupesh.assesment.carlease.entity.ReservationEntity;
 import com.rupesh.assesment.carlease.repository.ReservationRepository;
-import com.rupesh.assesment.carlease.run.ReservationEntity;
 
 @ExtendWith(MockitoExtension.class)
 public class ReservationServiceTest {

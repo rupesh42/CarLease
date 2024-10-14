@@ -6,27 +6,31 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import com.rupesh.assesment.carlease.run.ReservationEntity;
+import com.rupesh.assesment.carlease.entity.ReservationEntity;
 
 
 /**
- * ReservationRepository is a Spring Data JPA repository for the Reservation entity.
- * This interface provides methods for performing CRUD operations on Reservation entities.
- * It extends JpaRepository, which provides JPA related methods out of the box.
+ * ReservationRepository is a Spring Data JPA repository for the Reservation entity. This interface
+ * provides methods for performing CRUD operations on Reservation entities. It extends
+ * JpaRepository, which provides JPA related methods out of the box.
  * 
- * <p>Examples of usage:</p>
+ * <p>
+ * Examples of usage:
+ * </p>
+ * 
  * <pre>
- *     // Find a reservation by its ID
- *     Optional&lt;ReservationEntity&gt; reservation = reservationRepository.getReservationById(id);
+ * // Find a reservation by its ID
+ * Optional&lt;ReservationEntity&gt; reservation = reservationRepository.getReservationById(id);
  * 
- *     // Find existing bookings for a car within a date range
- *     List&lt;ReservationEntity&gt; bookings = reservationRepository.findExistingBooking(carId, startDate, endDate);
+ * // Find existing bookings for a car within a date range
+ * List&lt;ReservationEntity&gt; bookings =
+ *     reservationRepository.findExistingBooking(carId, startDate, endDate);
  * 
- *     // Save a new reservation
- *     ReservationEntity savedReservation = reservationRepository.save(newReservation);
+ * // Save a new reservation
+ * ReservationEntity savedReservation = reservationRepository.save(newReservation);
  * 
- *     // Delete a reservation
- *     reservationRepository.delete(reservation);
+ * // Delete a reservation
+ * reservationRepository.delete(reservation);
  * </pre>
  * 
  * @see JpaRepository
@@ -64,7 +68,7 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
    * @param endDate the end date of the booking period
    * @return a list of reservations within the specified date range for the given car
    */
-  
+
   @Query("SELECT b FROM ReservationEntity b WHERE b.carId = :carId AND b.startDate <= :endDate AND b.endDate >= :startDate")
   Optional<ReservationEntity> findExistingBooking(@Param("carId") Integer carId,
       @Param("startDate") Date startDate, @Param("endDate") Date endDate);

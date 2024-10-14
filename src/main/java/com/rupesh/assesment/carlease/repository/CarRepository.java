@@ -4,22 +4,24 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.rupesh.assesment.carlease.run.CarEntity;
+import com.rupesh.assesment.carlease.entity.CarEntity;
 
 
 /**
- * CarRepository is a Spring Data JPA repository for the Car entity.
- * This interface provides methods for performing CRUD operations on Car entities.
- * It extends JpaRepository, which provides JPA related methods out of the box.
+ * CarRepository is a Spring Data JPA repository for the Car entity. This interface provides methods
+ * for performing CRUD operations on Car entities. It extends JpaRepository, which provides JPA
+ * related methods out of the box.
  * 
- * <p>Examples of usage:</p>
+ * <p>
+ * Examples of usage:
+ * </p>
+ * 
  * <pre>
- *     // Find a car by its ID
- *     Optional<CarEntity> car = carRepository.findCarById(id);
+ * // Find a car by its ID
+ * Optional<CarEntity> car = carRepository.findCarById(id);
  * 
- *     // Save a new car
- *     Car savedCar = carRepository.save(newCar);
+ * // Save a new car
+ * Car savedCar = carRepository.save(newCar);
  * </pre>
  * 
  * @see JpaRepository

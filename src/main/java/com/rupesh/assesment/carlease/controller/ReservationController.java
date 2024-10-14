@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.rupesh.assesment.carlease.constants.constants;
-import com.rupesh.assesment.carlease.run.CarEntity;
-import com.rupesh.assesment.carlease.run.CustomerEntity;
-import com.rupesh.assesment.carlease.run.ReservationEntity;
+import com.rupesh.assesment.carlease.entity.CarEntity;
+import com.rupesh.assesment.carlease.entity.CustomerEntity;
+import com.rupesh.assesment.carlease.entity.ReservationEntity;
 import com.rupesh.assesment.carlease.service.CarService;
 import com.rupesh.assesment.carlease.service.CustomerService;
 import com.rupesh.assesment.carlease.service.ReservationService;
@@ -62,13 +62,14 @@ public class ReservationController {
             customerService.getCustomerbyid(reservationEntity.getCustId()),
             carService.getCarbyid(reservationEntity.getCarId())));
   }
-  
+
   /**
    * It is used to validate inputs to make sure the user knows what to give input.
+   * 
    * @param reservationEntity is an Entity @see ReservationEntity
    * @param customerEntity is an entity for @see CustomerEntity
    * @param carEntity is an entity for @see CarEntity
-   * @return error if the input is invalid or makes an reservation if success. 
+   * @return error if the input is invalid or makes an reservation if success.
    */
 
   public ResponseEntity<?> validateInputs(ReservationEntity reservationEntity,

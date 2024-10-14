@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * GlobalExceptionHandler handles exceptions globally across the application.
- * This class uses @ControllerAdvice and @ExceptionHandler annotations to
- * catch and handle exceptions thrown by controllers.
+ * GlobalExceptionHandler handles exceptions globally across the application. This class
+ * uses @ControllerAdvice and @ExceptionHandler annotations to catch and handle exceptions thrown by
+ * controllers.
  * 
  * @author rupesh
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-  
+
   /**
    * Handles ResourceNotFoundException exceptions.
    * 

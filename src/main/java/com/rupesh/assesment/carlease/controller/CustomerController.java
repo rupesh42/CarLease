@@ -9,16 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.rupesh.assesment.carlease.run.CustomerEntity;
+import com.rupesh.assesment.carlease.entity.CustomerEntity;
 import com.rupesh.assesment.carlease.service.CustomerService;
 import jakarta.validation.Valid;
 
 
 /**
- * CustomerController handles all customer-related HTTP requests.
- * This class provides endpoints for creating, retrieving customers.
- * It uses @RestController and @RequestMapping annotations to define request handling methods.
- * The request map of this controller is "/api" and followed by the Get/Post/Put Mapping; "/leaseCal", "/allCar" and "/createCar" .
+ * CustomerController handles all customer-related HTTP requests. This class provides endpoints for
+ * creating, retrieving customers. It uses @RestController and @RequestMapping annotations to define
+ * request handling methods. The request map of this controller is "/api" and followed by the
+ * Get/Post/Put Mapping; "/leaseCal", "/allCar" and "/createCar" .
+ * 
  * @author rupesh
  */
 
@@ -31,6 +32,7 @@ public class CustomerController {
 
   /**
    * it is pointing to the mapping /allCust
+   * 
    * @return it returns the List of Customers that exists in the Database.
    */
   @GetMapping("/allCust")
@@ -40,7 +42,9 @@ public class CustomerController {
 
   /**
    * it is pointing to the mapping /createCust
-   * @param car is param referring to @see com.rupesh.assesment.carlease.run.CustomerEntity it has all the variables needed.
+   * 
+   * @param car is param referring to @see com.rupesh.assesment.carlease.run.CustomerEntity it has
+   *        all the variables needed.
    * @return the message CREATED to indicate that the operation is success.
    */
   @PostMapping("/createCust")

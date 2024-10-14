@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rupesh.assesment.carlease.constants.ApplicationProperties;
+import com.rupesh.assesment.carlease.entity.CarEntity;
 import com.rupesh.assesment.carlease.repository.CarRepository;
-import com.rupesh.assesment.carlease.run.CarEntity;
 
 
 /**

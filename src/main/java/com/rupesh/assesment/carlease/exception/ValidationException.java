@@ -2,22 +2,27 @@ package com.rupesh.assesment.carlease.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
- * ValidationException is thrown when validation on an entity or a field fails.
- * This class extends RuntimeException and can be used to indicate that
- * validation has failed during processing.
+ * ValidationException is thrown when validation on an entity or a field fails. This class extends
+ * RuntimeException and can be used to indicate that validation has failed during processing.
  * 
- * <p>Examples of usage:</p>
+ * <p>
+ * Examples of usage:
+ * </p>
+ * 
  * <pre>
- *     if (entity.getField() == null) {
- *         throw new ValidationException("Field cannot be null");
- *     }
+ * if (entity.getField() == null) {
+ *   throw new ValidationException("Field cannot be null");
+ * }
  * </pre>
  * 
- * <p>Custom messages can be provided to indicate the specific validation error.</p>
+ * <p>
+ * Custom messages can be provided to indicate the specific validation error.
+ * </p>
  * 
  * <pre>
- *     throw new ValidationException("Custom error message");
+ * throw new ValidationException("Custom error message");
  * </pre>
  * 
  * @see RuntimeException

@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.rupesh.assesment.carlease.entity.ReservationEntity;
 import com.rupesh.assesment.carlease.repository.ReservationRepository;
-import com.rupesh.assesment.carlease.run.ReservationEntity;
 
 /**
- * ReservationService provides operations for managing reservation entities.
- * This class includes methods for creating, retrieving, and listing reservations,
- * as well as checking car availability.
+ * ReservationService provides operations for managing reservation entities. This class includes
+ * methods for creating, retrieving, and listing reservations, as well as checking car availability.
  * It interacts with the ReservationRepository to perform database operations.
  * 
  * @author rupesh
@@ -19,7 +18,7 @@ import com.rupesh.assesment.carlease.run.ReservationEntity;
 
 @Service
 public class ReservationService {
-  
+
   private final ReservationRepository resRepo;
 
   @Autowired

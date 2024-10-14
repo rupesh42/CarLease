@@ -4,8 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 
- * @author Rupesh 
- * This file helps to fetch data from .properties file for the values which may or
+ * @author Rupesh This file helps to fetch data from .properties file for the values which may or
  *         may not change in the future. As of now only InterestRate is applied to this file.
  */
 @ConfigurationProperties

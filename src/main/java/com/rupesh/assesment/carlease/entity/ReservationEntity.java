@@ -1,4 +1,4 @@
-package com.rupesh.assesment.carlease.run;
+package com.rupesh.assesment.carlease.entity;
 
 import java.util.Date;
 import java.util.Objects;
