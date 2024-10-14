@@ -266,10 +266,10 @@ The REST API to the example app is described below.
 }
 
 # Next Steps
-#####  The Booking date can be fetched automatically as today's date.
-#####  The address can be fetched directly from POSTNL API. 
-#####  Currency can have only two unit digits, Eg: 125.22 EUR rather than 125.234243 Eur
-#####  The car model can have more attributes like number of cars available, and if there are multiple cars, multiple customer can book the same car model.
-#####  Swagger API
-#####  Security using OAuth or JWT
-#####  Containerization. 
+##### - The Booking date can be fetched automatically as today's date.
+##### - The address can be fetched directly from POSTNL API. 
+##### - Currency can have only two unit digits, Eg: 125.22 EUR rather than 125.234243 Eur
+##### - The car model can have more attributes like number of cars available, and if there are multiple cars, multiple customer can book the same car model.
+##### - Swagger API
+##### - Security using OAuth or JWT
+##### - Containerization. 
