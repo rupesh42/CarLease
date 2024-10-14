@@ -1,5 +1,5 @@
 
-package com.rupesh.assesment.carlease.controller;
+package com.rupesh.assesment.carlease.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.rupesh.assesment.carlease.repository.CustomerRepository;
 import com.rupesh.assesment.carlease.run.CustomerEntity;
-import com.rupesh.assesment.carlease.service.CustomerService;
 
 @ExtendWith(MockitoExtension.class)
 public class CustomerServiceTest {

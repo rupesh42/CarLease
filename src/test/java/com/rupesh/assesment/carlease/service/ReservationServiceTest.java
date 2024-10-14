@@ -1,4 +1,4 @@
-package com.rupesh.assesment.carlease.controller;
+package com.rupesh.assesment.carlease.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.rupesh.assesment.carlease.repository.ReservationRepository;
 import com.rupesh.assesment.carlease.run.ReservationEntity;
-import com.rupesh.assesment.carlease.service.ReservationService;
 
 @ExtendWith(MockitoExtension.class)
 public class ReservationServiceTest {

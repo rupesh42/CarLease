@@ -11,6 +11,15 @@ import jakarta.validation.constraints.Pattern;
 @Entity
 public class CustomerEntity {
 
+  /**
+   * 
+   * @param name the name of the customer
+   * @param street the street address of the customer
+   * @param house_No the house number of the customer
+   * @param place the place of residence of the customer
+   * @param email the email address of the customer
+   * @param ph_Number the phone number of the customer
+   */
   public CustomerEntity(Integer id, String name, String street, String house_No, String place,
       @Email String email, @Pattern(regexp = "(^$|[0-9]{10})") String ph_Number) {
     super();
@@ -23,17 +32,45 @@ public class CustomerEntity {
     this.ph_Number = ph_Number;
   }
 
+
   public CustomerEntity() {}
 
+  /**
+   * The unique identifier for the person.
+   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
+
+  /**
+   * The name of the person.
+   */
   private String name;
+
+  /**
+   * The street address of the person.
+   */
   private String street;
+
+  /**
+   * The house number of the person.
+   */
   private String house_No;
+
+  /**
+   * The place (city/town) where the person resides.
+   */
   private String place;
+
+  /**
+   * The email address of the person.
+   */
   @Email
   private String email;
+
+  /**
+   * The phone number of the person.
+   */
   @Pattern(regexp = "(^$|[0-9]{10})")
   private String ph_Number;
 
@@ -93,29 +130,29 @@ public class CustomerEntity {
     this.ph_Number = ph_Number;
   }
 
+  // toString method
   @Override
   public String toString() {
     return "CustomerEntity [id=" + id + ", name=" + name + ", street=" + street + ", house_No="
         + house_No + ", place=" + place + ", email=" + email + ", ph_Number=" + ph_Number + "]";
   }
-  
+
   @Override
   public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-      CustomerEntity customer = (CustomerEntity) o;
-      return Objects.equals(id, customer.id) &&
-             Objects.equals(name, customer.name) &&
-             Objects.equals(street, customer.street) &&
-             Objects.equals(house_No, customer.house_No) &&
-             Objects.equals(place, customer.place) &&
-             Objects.equals(email, customer.email) &&
-             Objects.equals(ph_Number, customer.ph_Number);
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    CustomerEntity customer = (CustomerEntity) o;
+    return Objects.equals(id, customer.id) && Objects.equals(name, customer.name)
+        && Objects.equals(street, customer.street) && Objects.equals(house_No, customer.house_No)
+        && Objects.equals(place, customer.place) && Objects.equals(email, customer.email)
+        && Objects.equals(ph_Number, customer.ph_Number);
   }
 
   @Override
   public int hashCode() {
-      return Objects.hash(id, name, street, house_No, place, email, ph_Number);
+    return Objects.hash(id, name, street, house_No, place, email, ph_Number);
   }
 
 }
