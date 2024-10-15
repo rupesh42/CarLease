@@ -3,6 +3,7 @@ package com.rupesh.assesment.carlease.controller;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Arrays;
 import java.util.List;
@@ -15,8 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import com.rupesh.assesment.carlease.entity.CustomerEntity;
 import com.rupesh.assesment.carlease.repository.CustomerRepository;
+import com.rupesh.assesment.carlease.run.CustomerEntity;
 import com.rupesh.assesment.carlease.service.CustomerService;
 
 @WebMvcTest(CustomerController.class)
@@ -27,7 +28,7 @@ public class CustomerControllerTest {
 
   @MockBean
   private CustomerService custService;
-
+  
   @Mock
   private CustomerRepository custRepo;
 
@@ -77,7 +78,9 @@ public class CustomerControllerTest {
 
     when(custService.getAllCustomers()).thenReturn(customer3);
 
-    mvc.perform(get("/api/allCust")).andExpect(status().isOk());
+    mvc.perform(get("/api/allCust")).andExpect(status().isOk())
+        .andExpect(jsonPath("$[0].name").value("John Doe"))
+        .andExpect(jsonPath("$[1].name").value("John 1"));
   }
 
 

@@ -10,8 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import com.rupesh.assesment.carlease.entity.CarEntity;
 import com.rupesh.assesment.carlease.repository.CarRepository;
+import com.rupesh.assesment.carlease.run.CarEntity;
 import com.rupesh.assesment.carlease.service.CarService;
 
 @WebMvcTest(CarController.class)
@@ -19,10 +19,10 @@ public class CarControllerTest {
 
   @Autowired
   private MockMvc mvc;
-
+  
   @MockBean
   private CarService carService;
-
+  
   @Mock
   private CarRepository carRepo;
 
