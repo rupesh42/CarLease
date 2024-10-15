@@ -1,5 +1,5 @@
 
-package com.rupesh.assesment.carlease.controller;
+package com.rupesh.assesment.carlease.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -13,9 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.rupesh.assesment.carlease.constants.ApplicationProperties;
+import com.rupesh.assesment.carlease.entity.CarEntity;
 import com.rupesh.assesment.carlease.repository.CarRepository;
-import com.rupesh.assesment.carlease.run.CarEntity;
-import com.rupesh.assesment.carlease.service.CarService;
 
 
 @ExtendWith(MockitoExtension.class)
