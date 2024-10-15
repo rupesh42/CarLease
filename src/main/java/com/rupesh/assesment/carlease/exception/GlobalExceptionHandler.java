@@ -10,9 +10,24 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * GlobalExceptionHandler handles exceptions globally across the application. This class
+ * uses @ControllerAdvice and @ExceptionHandler annotations to catch and handle exceptions thrown by
+ * controllers.
+ * 
+ * @author rupesh
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+
+  /**
+   * Handles ResourceNotFoundException exceptions.
+   * 
+   * @param ex the exception
+   * @param request the web request
+   * @return a ResponseEntity containing the error details
+   */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ResponseEntity<Map<String, String>> handleValidationExceptions(
@@ -23,6 +38,13 @@ public class GlobalExceptionHandler {
     return ResponseEntity.badRequest().body(errors);
   }
 
+  /**
+   * Handles Global exceptions.
+   * 
+   * @param ex the exception
+   * @param request the web request
+   * @return a ResponseEntity containing the error details
+   */
   @ExceptionHandler(ValidationException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ResponseEntity<String> handleCustomValidationException(ValidationException ex) {
