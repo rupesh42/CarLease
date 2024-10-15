@@ -19,10 +19,10 @@ public class CarControllerTest {
 
   @Autowired
   private MockMvc mvc;
-  
+
   @MockBean
   private CarService carService;
-  
+
   @Mock
   private CarRepository carRepo;
 
