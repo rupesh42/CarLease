@@ -26,6 +26,7 @@ public class CarServiceTest {
   @Mock
   private ApplicationProperties appProperties;
 
+  
   @InjectMocks
   private CarService carService;
 
