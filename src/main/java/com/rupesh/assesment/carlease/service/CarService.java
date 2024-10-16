@@ -57,8 +57,8 @@ public class CarService {
         carRepo.findById(carId).orElseThrow(() -> new RuntimeException("Car not found"));
     double mileage = car.getMileage();
     double nettPrice = car.getNettPrice();
-    return ((((mileage / 12) * duration) / nettPrice))
-        + (((appProperties.getInterestRate() / 100) * nettPrice) / 12);
+    return roundToPlaces(((((mileage / 12) * duration) / nettPrice))
+        + (((appProperties.getInterestRate() / 100) * nettPrice) / 12), 2);
   }
 
   /**
@@ -92,5 +92,10 @@ public class CarService {
 
   public CarEntity createCar(CarEntity car) {
     return carRepo.save(car);
+  }
+
+  public double roundToPlaces(double value, int places) {
+    long factor = (long) Math.pow(10, places);
+    return (double) Math.round(value * factor) / factor;
   }
 }

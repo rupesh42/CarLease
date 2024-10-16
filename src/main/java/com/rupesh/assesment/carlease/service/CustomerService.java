@@ -56,4 +56,35 @@ public class CustomerService {
     return custRepo.save(cust);
   }
 
+
+
+  /**
+   * Updates an existing customer.
+   * 
+   * @param id the ID of the customer to update
+   * @param customerDetails the updated customer information
+   * @return an Optional containing the updated customer entity if found, or an empty Optional if
+   *         not found
+   */
+  public Optional<CustomerEntity> updateCustomer(Integer id, CustomerEntity customerDetails) {
+    return custRepo.findById(id).map(customer -> {
+      customer.setName(customerDetails.getName());
+      customer.setStreet(customerDetails.getStreet());
+      customer.setHouse_No(customerDetails.getHouse_No());
+      customer.setPlace(customerDetails.getPlace());
+      customer.setEmail(customerDetails.getEmail());
+      customer.setPh_Number(customerDetails.getPh_Number());
+      return custRepo.save(customer);
+    });
+  }
+
+  /**
+   * Deletes a customer by its ID.
+   * 
+   * @param id the ID of the customer to delete
+   */
+  public void deleteCustomer(Integer id) {
+    custRepo.deleteById(id);
+
+  }
 }

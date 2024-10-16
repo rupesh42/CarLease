@@ -1,6 +1,5 @@
 package com.rupesh.assesment.carlease.controller;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.rupesh.assesment.carlease.constants.constants;
 import com.rupesh.assesment.carlease.entity.CarEntity;
 import com.rupesh.assesment.carlease.service.CarService;
 import jakarta.validation.Valid;
@@ -39,8 +39,16 @@ public class CarController {
    * @return it returns the rate in Euros of the lease.
    */
   @GetMapping("/leaseCal")
-  public double getLeaseRate(@Valid @RequestParam Integer id, @RequestParam Integer duration) {
-    return carService.calculateLeaseRate(id, duration);
+  public ResponseEntity<?> getLeaseRate(@Valid @RequestParam Integer id,
+      @RequestParam Integer duration) {
+
+    if (carService.getAllCars().isEmpty()) {
+      return ResponseEntity.ok(constants.CAR_NOT_FOUND);
+    } else {
+      carService.calculateLeaseRate(id, duration);
+      return new ResponseEntity<>(constants.SUCCESS, HttpStatus.OK);
+    }
+
   }
 
   /**
@@ -50,8 +58,13 @@ public class CarController {
    * @return
    */
   @GetMapping("/allCar")
-  public List<CarEntity> getAllCars() {
-    return carService.getAllCars();
+  public ResponseEntity<?> getAllCars() {
+    if (carService.getAllCars().isEmpty()) {
+      return ResponseEntity.ok(constants.CAR_NOT_FOUND);
+    } else {
+      carService.getAllCars();
+      return new ResponseEntity<>(constants.SUCCESS, HttpStatus.OK);
+    }
   }
 
   /**
@@ -63,8 +76,7 @@ public class CarController {
    */
   @PostMapping("/createCar")
   public ResponseEntity<CarEntity> createCar(@Valid @RequestBody CarEntity car) {
-    CarEntity savedCar = carService.createCar(car);
-    return ResponseEntity.status(HttpStatus.CREATED).body(savedCar);
+    return ResponseEntity.status(HttpStatus.CREATED).body(carService.createCar(car));
   }
 
 }

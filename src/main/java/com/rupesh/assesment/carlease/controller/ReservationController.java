@@ -1,7 +1,6 @@
 package com.rupesh.assesment.carlease.controller;
 
 import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +43,6 @@ public class ReservationController {
     this.customerService = customerService;
     this.carService = carService;
   }
-
-
 
   /**
    * Creates a new reservation using Customer ID and Car ID.
@@ -97,8 +94,12 @@ public class ReservationController {
    */
 
   @GetMapping("/allReservations")
-  public List<ReservationEntity> getAllReservation() {
-    return reservationService.getAllReservation();
+  public ResponseEntity<?> getAllReservation() {
+    if (reservationService.getAllReservation().isEmpty()) {
+      return new ResponseEntity<>(constants.NO_RESERVATION, HttpStatus.OK);
+    }
+    reservationService.getAllReservation();
+    return new ResponseEntity<>(constants.SUCCESS, HttpStatus.OK);
   }
 
 }

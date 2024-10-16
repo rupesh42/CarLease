@@ -265,6 +265,9 @@ The REST API to the example app is described below.
     "statusCodeValue": 200
 }
 
+#SWAGGER URL:
+http://localhost:8081/swagger-ui/index.html
+
 # Next Steps
 ##### - The Booking date can be fetched automatically as today's date.
 ##### - The address can be fetched directly from POSTNL API. 

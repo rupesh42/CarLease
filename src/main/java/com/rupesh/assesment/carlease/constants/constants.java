@@ -18,4 +18,13 @@ public class constants {
 
   // In case the car requested to be reserved is already booked
   public static final String CAR_UNAVAILABLE = "Car is already booked for the selected dates.";
+  
+  public static final String DELETED = "CUSTOMER IS DELETED";
+  
+  public static final String CUSTOMER_NOT_FOUND = "CUSTOMER is not present";
+  
+  public static final String CAR_NOT_FOUND = "CAR is not present";
+  
+  public static final String NO_RESERVATION = "There are no reservation present currently!";
+  
 }

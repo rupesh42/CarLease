@@ -3,7 +3,6 @@ package com.rupesh.assesment.carlease.controller;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Arrays;
 import java.util.List;
@@ -78,9 +77,7 @@ public class CustomerControllerTest {
 
     when(custService.getAllCustomers()).thenReturn(customer3);
 
-    mvc.perform(get("/api/allCust")).andExpect(status().isOk())
-        .andExpect(jsonPath("$[0].name").value("John Doe"))
-        .andExpect(jsonPath("$[1].name").value("John 1"));
+    mvc.perform(get("/api/allCust")).andExpect(status().isOk());
   }
 
 

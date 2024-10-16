@@ -40,7 +40,8 @@ public class CarServiceTest {
 
     // Expected calculation
     double expectedLeaseRate =
-        ((((24000.0 / 12) * duration) / 20000.0)) + (((5.0 / 100) * 20000.0) / 12);
+        carService.roundToPlaces(((((setCarData().getMileage() / 12) * duration) / setCarData().getNettPrice()))
+            + (((appProperties.getInterestRate() / 100) * setCarData().getNettPrice()) / 12), 2);
 
     double leaseRate = carService.calculateLeaseRate(carId, duration);
     assertEquals(expectedLeaseRate, leaseRate, 0.0001);
@@ -83,6 +84,7 @@ public class CarServiceTest {
 
     return car;
   }
+  
 }
 
 
