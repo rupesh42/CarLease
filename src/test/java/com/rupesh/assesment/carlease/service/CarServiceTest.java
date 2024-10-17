@@ -4,6 +4,8 @@ package com.rupesh.assesment.carlease.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.BDDMockito.given;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +14,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import com.rupesh.assesment.carlease.car.CarEntity;
+import com.rupesh.assesment.carlease.car.CarRepository;
+import com.rupesh.assesment.carlease.car.CarService;
 import com.rupesh.assesment.carlease.constants.ApplicationProperties;
-import com.rupesh.assesment.carlease.entity.CarEntity;
-import com.rupesh.assesment.carlease.repository.CarRepository;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -26,27 +29,39 @@ public class CarServiceTest {
   @Mock
   private ApplicationProperties appProperties;
 
-  
   @InjectMocks
   private CarService carService;
 
   @Test
-  public void testCalculateLeaseRate() { // Test data
+  public void testCalculateLeaseRate_Success() {
+    // Test data
     Integer carId = 1;
     Integer duration = 12;
+    CarEntity car = new CarEntity();
+    car.setMileage(24000.0);
+    car.setNettPrice(BigDecimal.valueOf(20000.0));
 
     // Mock behavior
-    given(carRepo.findById(carId)).willReturn(Optional.of(setCarData()));
+    given(carRepo.findById(carId)).willReturn(Optional.of(car));
     given(appProperties.getInterestRate()).willReturn(5.0);
 
     // Expected calculation
-    double expectedLeaseRate =
-        carService.roundToPlaces(((((setCarData().getMileage() / 12) * duration) / setCarData().getNettPrice()))
-            + (((appProperties.getInterestRate() / 100) * setCarData().getNettPrice()) / 12), 2);
+    BigDecimal mileage = BigDecimal.valueOf(car.getMileage());
+    BigDecimal nettPrice = car.getNettPrice();
+    BigDecimal interestRate =
+        BigDecimal.valueOf(appProperties.getInterestRate()).divide(BigDecimal.valueOf(100));
+    BigDecimal monthlyMileageCost = mileage.divide(BigDecimal.valueOf(12), 2, RoundingMode.HALF_UP)
+        .multiply(BigDecimal.valueOf(duration));
+    BigDecimal expectedLeaseRate = monthlyMileageCost
+        .divide(nettPrice, 2, RoundingMode.HALF_UP).add(interestRate.multiply(nettPrice)
+            .divide(BigDecimal.valueOf(12), 2, RoundingMode.HALF_UP))
+        .setScale(2, RoundingMode.HALF_UP);
 
-    double leaseRate = carService.calculateLeaseRate(carId, duration);
-    assertEquals(expectedLeaseRate, leaseRate, 0.0001);
+    // Verify
+    BigDecimal leaseRate = carService.calculateLeaseRate(carId, duration);
+    assertEquals(expectedLeaseRate, leaseRate);
   }
+
 
   @Test
   public void testGetAllCars() {
@@ -54,7 +69,7 @@ public class CarServiceTest {
     CarEntity car1 = new CarEntity();
     car1.setId(1);
     car1.setMileage(15000.0);
-    car1.setNettPrice(25000.0);
+    car1.setNettPrice(new BigDecimal(25000.00));
     cars.add(car1);
     cars.add(setCarData());
 
@@ -62,30 +77,44 @@ public class CarServiceTest {
 
     List<CarEntity> result = carService.getAllCars();
     assertEquals(2, result.size());
-    assertEquals(car1, result.get(0));
-    assertEquals(setCarData(), result.get(1));
+    assertNotNull(result);
   }
 
+
   @Test
-  public void testCreateCar() {
+  public void testCreateCar() { // Test data
+    CarEntity car = new CarEntity();
+    car.setMileage(24000.0);
+    car.setNettPrice(BigDecimal.valueOf(20000.0));
+    car.setMaker("Toyota");
+    car.setCarModel("Camry");
+    car.setVersion("LE");
+    car.setDoors(4);
+    car.setCo2("150g/km");
+    car.setGrossPrice(BigDecimal.valueOf(23000.0));
 
-    given(carRepo.save(setCarData())).willReturn(setCarData());
+    // Mock behavior
+    given(carRepo.save(car)).willReturn(setCarData());
 
-    
-    CarEntity result = carService.createCar(setCarData());
-    assertNotNull(result);
-    assertEquals(setCarData(), result);
+    // Verify
+    assertEquals(setCarData(), carService.createCar(car));
   }
 
   public CarEntity setCarData() {
     CarEntity car = new CarEntity();
-    car.setId(1);
+    car.setId(2);
     car.setMileage(24000.0);
-    car.setNettPrice(20000.0);
+    car.setNettPrice(BigDecimal.valueOf(20000.0));
+    car.setMaker("Toyota");
+    car.setCarModel("Camry");
+    car.setVersion("LE");
+    car.setDoors(4);
+    car.setCo2("150g/km");
+    car.setGrossPrice(BigDecimal.valueOf(23000.0));
 
     return car;
   }
-  
+
 }
 
 

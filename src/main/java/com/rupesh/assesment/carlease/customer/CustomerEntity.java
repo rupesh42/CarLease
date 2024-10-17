@@ -1,4 +1,4 @@
-package com.rupesh.assesment.carlease.entity;
+package com.rupesh.assesment.carlease.customer;
 
 import java.util.Objects;
 import jakarta.persistence.Entity;

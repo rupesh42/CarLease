@@ -1,4 +1,4 @@
-package com.rupesh.assesment.carlease.repository;
+package com.rupesh.assesment.carlease.reservation;
 
 import java.util.Date;
 import java.util.Optional;
@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import com.rupesh.assesment.carlease.entity.ReservationEntity;
 
 
 /**
@@ -49,16 +48,6 @@ import com.rupesh.assesment.carlease.entity.ReservationEntity;
  */
 @Repository
 public interface ReservationRepository extends JpaRepository<ReservationEntity, Integer> {
-
-  /**
-   * Finds existing bookings for a specific car within the specified date range.
-   * 
-   * @param carId the ID of the car
-   * @param startDate the start date of the booking period
-   * @param endDate the end date of the booking period
-   * @return a list of reservations within the specified date range for the given car
-   */
-  Optional<ReservationEntity> getReservationById(Integer id);
 
   /**
    * Finds existing bookings for a specific car within the specified date range.

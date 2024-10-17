@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +16,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import com.rupesh.assesment.carlease.entity.ReservationEntity;
-import com.rupesh.assesment.carlease.repository.ReservationRepository;
+import com.rupesh.assesment.carlease.reservation.ReservationEntity;
+import com.rupesh.assesment.carlease.reservation.ReservationRepository;
+import com.rupesh.assesment.carlease.reservation.ReservationService;
 
 @ExtendWith(MockitoExtension.class)
 public class ReservationServiceTest {
@@ -38,14 +40,14 @@ public class ReservationServiceTest {
     reservation.setStartDate(new Date());
     reservation.setEndDate(new Date());
     reservation.setBookingDate(new Date());
-    reservation.setTotalBill(123.45);
+    reservation.setTotalBill(new BigDecimal(123.45));
     reservation.setDuration(10);
 
     // Mock behavior
     given(resRepo.save(reservation)).willReturn(reservation);
 
     // Verify
-    ReservationEntity result = reservationService.createBooking(reservation);
+    ReservationEntity result = reservationService.makeReservation(reservation);
     assertNotNull(result);
     assertEquals(reservation, result);
   }
@@ -98,15 +100,11 @@ public class ReservationServiceTest {
 
   @Test
   public void testGetReservationById() {
-    Integer rId = 1;
     ReservationEntity resEntity = new ReservationEntity();
-    resEntity.setId(rId);
+    resEntity.setId(1);
     // Add other properties to resEntity
-
-    when(resRepo.getReservationById(rId)).thenReturn(Optional.of(resEntity));
-
-    Optional<ReservationEntity> result = reservationService.getReservationById(rId);
-
+    when(resRepo.findById(1)).thenReturn(Optional.of(resEntity));
+    Optional<ReservationEntity> result = reservationService.getReservationById(1);
     assertEquals(Optional.of(resEntity), result);
   }
 

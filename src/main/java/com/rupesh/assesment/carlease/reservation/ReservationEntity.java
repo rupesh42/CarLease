@@ -1,5 +1,6 @@
-package com.rupesh.assesment.carlease.entity;
+package com.rupesh.assesment.carlease.reservation;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -50,7 +51,7 @@ public class ReservationEntity {
   /**
    * The total bill amount for the rental in EUR.
    */
-  private double totalBill;
+  private BigDecimal totalBill;
 
   private Integer duration;
 
@@ -66,24 +67,9 @@ public class ReservationEntity {
     return Objects.hash(bookingDate, carId, custId, duration, endDate, id, startDate, totalBill);
   }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if (!(obj instanceof ReservationEntity)) {
-      return false;
-    }
-    ReservationEntity other = (ReservationEntity) obj;
-    return Objects.equals(bookingDate, other.bookingDate) && Objects.equals(carId, other.carId)
-        && Objects.equals(custId, other.custId) && Objects.equals(duration, other.duration)
-        && Objects.equals(endDate, other.endDate) && Objects.equals(id, other.id)
-        && Objects.equals(startDate, other.startDate)
-        && Double.doubleToLongBits(totalBill) == Double.doubleToLongBits(other.totalBill);
-  }
 
   public ReservationEntity(Integer rId, Integer custId, Integer carId,
-      @FutureOrPresent Date startDate, @Future Date endDate, Date bookingDate, double totalBill,
+      @FutureOrPresent Date startDate, @Future Date endDate, Date bookingDate, BigDecimal totalBill,
       Integer duration) {
     super();
     this.id = rId;
@@ -146,12 +132,12 @@ public class ReservationEntity {
     this.bookingDate = bookingDate;
   }
 
-  public double getTotalBill() {
+  public BigDecimal getTotalBill() {
     return totalBill;
   }
 
-  public void setTotalBill(double totalBill) {
-    this.totalBill = totalBill;
+  public void setTotalBill(BigDecimal bigDecimal) {
+    this.totalBill = bigDecimal;
   }
 
   public Integer getDuration() {

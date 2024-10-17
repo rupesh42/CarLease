@@ -1,11 +1,10 @@
 
-package com.rupesh.assesment.carlease.repository;
+package com.rupesh.assesment.carlease.customer;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.rupesh.assesment.carlease.entity.CustomerEntity;
 
 /**
  * CustomerRepository is a Spring Data JPA repository for the Customer entity. This interface
@@ -42,5 +41,4 @@ import com.rupesh.assesment.carlease.entity.CustomerEntity;
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
 
-  Optional<CustomerEntity> findCustomerByid(Integer id);
 }

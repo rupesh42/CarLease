@@ -1,11 +1,9 @@
-package com.rupesh.assesment.carlease.service;
+package com.rupesh.assesment.carlease.customer;
 
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.rupesh.assesment.carlease.entity.CustomerEntity;
-import com.rupesh.assesment.carlease.repository.CustomerRepository;
 
 
 /**
@@ -42,7 +40,7 @@ public class CustomerService {
    * @return an Optional containing the CustomerEntity if found, or null if not found
    */
   public CustomerEntity getCustomerbyid(Integer id) {
-    Optional<CustomerEntity> cust = custRepo.findCustomerByid(id);
+    Optional<CustomerEntity> cust = custRepo.findById(id);
     return cust.orElse(null);
   }
 

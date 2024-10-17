@@ -1,4 +1,4 @@
-package com.rupesh.assesment.carlease.controller;
+package com.rupesh.assesment.carlease.car;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.rupesh.assesment.carlease.constants.constants;
-import com.rupesh.assesment.carlease.entity.CarEntity;
-import com.rupesh.assesment.carlease.service.CarService;
+import com.rupesh.assesment.carlease.constants.Constants;
 import jakarta.validation.Valid;
 
 /**
@@ -28,8 +26,13 @@ import jakarta.validation.Valid;
 @RequestMapping("/api")
 public class CarController {
 
-  @Autowired
   private CarService carService;
+  
+  @Autowired
+  public CarController(CarService carService) {
+    this.carService = carService;
+  }
+  
 
   /**
    * it is pointing to the mapping /leaseCal
@@ -43,10 +46,10 @@ public class CarController {
       @RequestParam Integer duration) {
 
     if (carService.getAllCars().isEmpty()) {
-      return ResponseEntity.ok(constants.CAR_NOT_FOUND);
+      return ResponseEntity.ok(Constants.CAR_NOT_FOUND);
     } else {
       carService.calculateLeaseRate(id, duration);
-      return new ResponseEntity<>(constants.SUCCESS, HttpStatus.OK);
+      return new ResponseEntity<>(Constants.SUCCESS, HttpStatus.OK);
     }
 
   }
@@ -60,10 +63,10 @@ public class CarController {
   @GetMapping("/allCar")
   public ResponseEntity<?> getAllCars() {
     if (carService.getAllCars().isEmpty()) {
-      return ResponseEntity.ok(constants.CAR_NOT_FOUND);
+      return ResponseEntity.ok(Constants.CAR_NOT_FOUND);
     } else {
       carService.getAllCars();
-      return new ResponseEntity<>(constants.SUCCESS, HttpStatus.OK);
+      return new ResponseEntity<>(Constants.SUCCESS, HttpStatus.OK);
     }
   }
 
@@ -76,7 +79,8 @@ public class CarController {
    */
   @PostMapping("/createCar")
   public ResponseEntity<CarEntity> createCar(@Valid @RequestBody CarEntity car) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(carService.createCar(car));
+    System.out.println("Received car: " + car); 
+    return ResponseEntity.status(HttpStatus.OK).body(carService.createCar(car));
   }
 
 }

@@ -1,12 +1,12 @@
-package com.rupesh.assesment.carlease.service;
+package com.rupesh.assesment.carlease.car;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rupesh.assesment.carlease.constants.ApplicationProperties;
-import com.rupesh.assesment.carlease.entity.CarEntity;
-import com.rupesh.assesment.carlease.repository.CarRepository;
 
 
 /**
@@ -52,13 +52,23 @@ public class CarService {
    * @throws RuntimeException if the car with the given ID is not found
    */
 
-  public double calculateLeaseRate(Integer carId, Integer duration) {
-    CarEntity car =
-        carRepo.findById(carId).orElseThrow(() -> new RuntimeException("Car not found"));
-    double mileage = car.getMileage();
-    double nettPrice = car.getNettPrice();
-    return roundToPlaces(((((mileage / 12) * duration) / nettPrice))
-        + (((appProperties.getInterestRate() / 100) * nettPrice) / 12), 2);
+  public BigDecimal calculateLeaseRate(Integer carId, Integer duration) {
+    Optional<CarEntity> optionalCar = carRepo.findById(carId);
+
+    if (optionalCar.isEmpty()) {
+        throw new RuntimeException("Car not found");
+    }
+
+    CarEntity car = optionalCar.get();
+    BigDecimal mileage = BigDecimal.valueOf(car.getMileage());
+    BigDecimal nettPrice = car.getNettPrice();
+    BigDecimal interestRate = BigDecimal.valueOf(appProperties.getInterestRate()).divide(BigDecimal.valueOf(100));
+
+    BigDecimal monthlyMileageCost = mileage.divide(BigDecimal.valueOf(12), 2, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(duration));
+    BigDecimal leaseRate = monthlyMileageCost.divide(nettPrice, 2, RoundingMode.HALF_UP)
+                        .add(interestRate.multiply(nettPrice).divide(BigDecimal.valueOf(12), 2, RoundingMode.HALF_UP));
+
+    return leaseRate.setScale(2, RoundingMode.HALF_UP);
   }
 
   /**
@@ -69,7 +79,7 @@ public class CarService {
    */
 
   public CarEntity getCarbyid(Integer id) {
-    Optional<CarEntity> car = carRepo.findCarByid(id);
+    Optional<CarEntity> car = carRepo.findById(id);
     return car.orElse(null);
   }
 
@@ -92,10 +102,5 @@ public class CarService {
 
   public CarEntity createCar(CarEntity car) {
     return carRepo.save(car);
-  }
-
-  public double roundToPlaces(double value, int places) {
-    long factor = (long) Math.pow(10, places);
-    return (double) Math.round(value * factor) / factor;
   }
 }

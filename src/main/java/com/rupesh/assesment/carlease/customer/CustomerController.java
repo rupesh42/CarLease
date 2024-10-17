@@ -1,4 +1,4 @@
-package com.rupesh.assesment.carlease.controller;
+package com.rupesh.assesment.carlease.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.rupesh.assesment.carlease.constants.constants;
-import com.rupesh.assesment.carlease.entity.CustomerEntity;
-import com.rupesh.assesment.carlease.service.CustomerService;
+import com.rupesh.assesment.carlease.constants.Constants;
 import jakarta.validation.Valid;
 
 
@@ -45,10 +43,10 @@ public class CustomerController {
   @GetMapping("/allCust")
   public ResponseEntity<?> getAllCust() {
     if (custService.getAllCustomers().isEmpty()) {
-      return ResponseEntity.ok(constants.CUSTOMER_NOT_FOUND);
+      return ResponseEntity.ok(Constants.CUSTOMER_NOT_FOUND);
     } else {
       custService.getAllCustomers();
-      return new ResponseEntity<>(constants.SUCCESS, HttpStatus.OK);
+      return new ResponseEntity<>(Constants.SUCCESS, HttpStatus.OK);
     }
 
   }
@@ -79,10 +77,10 @@ public class CustomerController {
       @RequestBody CustomerEntity customerDetails) {
 
     if (custService.getCustomerbyid(id) == null) {
-      return ResponseEntity.ok(constants.CUSTOMER_NOT_FOUND);
+      return ResponseEntity.ok(Constants.CUSTOMER_NOT_FOUND);
     } else {
       custService.updateCustomer(id, customerDetails);
-      return new ResponseEntity<>(constants.SUCCESS, HttpStatus.OK);
+      return new ResponseEntity<>(Constants.SUCCESS, HttpStatus.OK);
     }
 
   }
@@ -96,10 +94,10 @@ public class CustomerController {
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
     if (custService.getCustomerbyid(id) == null) {
-      return ResponseEntity.ok(constants.CUSTOMER_NOT_FOUND);
+      return ResponseEntity.ok(Constants.CUSTOMER_NOT_FOUND);
     } else {
       custService.deleteCustomer(id);
-      return new ResponseEntity<>(constants.DELETED, HttpStatus.OK);
+      return new ResponseEntity<>(Constants.DELETED, HttpStatus.OK);
     }
   }
 }

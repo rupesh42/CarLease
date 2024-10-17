@@ -15,9 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import com.rupesh.assesment.carlease.entity.CustomerEntity;
-import com.rupesh.assesment.carlease.repository.CustomerRepository;
-import com.rupesh.assesment.carlease.service.CustomerService;
+import com.rupesh.assesment.carlease.customer.CustomerController;
+import com.rupesh.assesment.carlease.customer.CustomerEntity;
+import com.rupesh.assesment.carlease.customer.CustomerRepository;
+import com.rupesh.assesment.carlease.customer.CustomerService;
 
 @WebMvcTest(CustomerController.class)
 public class CustomerControllerTest {

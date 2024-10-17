@@ -1,6 +1,6 @@
-package com.rupesh.assesment.carlease.controller;
+package com.rupesh.assesment.carlease.reservation;
 
-import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.rupesh.assesment.carlease.constants.constants;
-import com.rupesh.assesment.carlease.entity.CarEntity;
-import com.rupesh.assesment.carlease.entity.CustomerEntity;
-import com.rupesh.assesment.carlease.entity.ReservationEntity;
-import com.rupesh.assesment.carlease.service.CarService;
-import com.rupesh.assesment.carlease.service.CustomerService;
-import com.rupesh.assesment.carlease.service.ReservationService;
+import com.rupesh.assesment.carlease.car.CarEntity;
+import com.rupesh.assesment.carlease.car.CarService;
+import com.rupesh.assesment.carlease.constants.Constants;
+import com.rupesh.assesment.carlease.customer.CustomerEntity;
+import com.rupesh.assesment.carlease.customer.CustomerService;
 import jakarta.validation.Valid;
 
 /**
@@ -71,21 +69,9 @@ public class ReservationController {
 
   public ResponseEntity<?> validateInputs(ReservationEntity reservationEntity,
       CustomerEntity customerEntity, CarEntity carEntity) {
-    if (customerEntity == null || carEntity == null) {
-      return ResponseEntity.ok(constants.NO_CAR_OR_CUSTOMER_FOUND);
-    } else if (reservationEntity.getEndDate().before(reservationEntity.getStartDate())) {
-      return ResponseEntity.ok(constants.END_DATE_BEFORE);
-    } else if (!reservationService.isCarAvailable(reservationEntity.getCarId(),
-        reservationEntity.getStartDate(), reservationEntity.getEndDate())) {
-      return ResponseEntity.ok(constants.CAR_UNAVAILABLE);
-    } else {
-      reservationEntity.setBookingDate(new Date());
-      reservationEntity.setTotalBill(carService.calculateLeaseRate(reservationEntity.getCarId(),
-          reservationEntity.getDuration()));
-      reservationService.createBooking(reservationEntity);
-      return new ResponseEntity<>(constants.SUCCESS, HttpStatus.OK);
+      reservationService.makeReservation(reservationEntity, customerEntity, carEntity);
+      return new ResponseEntity<>(Constants.SUCCESS, HttpStatus.OK);
     }
-  }
 
   /**
    * Retrieves all reservations.
@@ -94,12 +80,8 @@ public class ReservationController {
    */
 
   @GetMapping("/allReservations")
-  public ResponseEntity<?> getAllReservation() {
-    if (reservationService.getAllReservation().isEmpty()) {
-      return new ResponseEntity<>(constants.NO_RESERVATION, HttpStatus.OK);
-    }
-    reservationService.getAllReservation();
-    return new ResponseEntity<>(constants.SUCCESS, HttpStatus.OK);
+  public List<?> getAllReservation() {
+    return reservationService.getAllReservation();
   }
 
 }

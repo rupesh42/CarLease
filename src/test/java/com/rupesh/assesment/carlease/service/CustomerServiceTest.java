@@ -11,8 +11,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import com.rupesh.assesment.carlease.entity.CustomerEntity;
-import com.rupesh.assesment.carlease.repository.CustomerRepository;
+import com.rupesh.assesment.carlease.customer.CustomerEntity;
+import com.rupesh.assesment.carlease.customer.CustomerRepository;
+import com.rupesh.assesment.carlease.customer.CustomerService;
 
 @ExtendWith(MockitoExtension.class)
 public class CustomerServiceTest {
@@ -42,10 +43,10 @@ public class CustomerServiceTest {
 
   @Test public void testGetCustomerById() {
   
-  when(custRepo.findCustomerByid(1)).thenReturn(Optional.of(setCustomerData()));
+  when(custRepo.findById(1)).thenReturn(Optional.of(setCustomerData()));
   assertEquals(setCustomerData(), custService.getCustomerbyid(1));
   
-  when(custRepo.findCustomerByid(2)).thenReturn(Optional.empty());
+  when(custRepo.findById(2)).thenReturn(Optional.empty());
   assertNull(custService.getCustomerbyid(2)); }
 
   @Test

@@ -1,5 +1,6 @@
-package com.rupesh.assesment.carlease.entity;
+package com.rupesh.assesment.carlease.car;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,41 +31,46 @@ import jakarta.persistence.Id;
 @Entity
 public class CarEntity {
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(carModel, co2, doors, grossPrice, id, maker, mileage, nettPrice, version);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    CarEntity other = (CarEntity) obj;
-    return Objects.equals(carModel, other.carModel) && Objects.equals(co2, other.co2)
-        && doors == other.doors
-        && Double.doubleToLongBits(grossPrice) == Double.doubleToLongBits(other.grossPrice)
-        && Objects.equals(id, other.id) && Objects.equals(maker, other.maker)
-        && Double.doubleToLongBits(mileage) == Double.doubleToLongBits(other.mileage)
-        && Double.doubleToLongBits(nettPrice) == Double.doubleToLongBits(other.nettPrice)
-        && Objects.equals(version, other.version);
-  }
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
   private double mileage;
-  private double nettPrice;
+  private BigDecimal nettPrice;
 
   private String maker;
   private String carModel;
   private String version;
-  private int doors;
+  private Integer doors;
   private String co2;
-  private double grossPrice;
+  private BigDecimal grossPrice;
+
+  /**
+   * Constructor with all fields.
+   * 
+   * @param id the ID of the car
+   * @param mileage the mileage of the car
+   * @param nettPrice the net price of the car
+   * @param maker the maker of the car
+   * @param carModel the model of the car
+   * @param version the version of the car
+   * @param doors the number of doors
+   * @param co2 the CO2 emissions
+   * @param grossPrice the gross price
+   */
+
+  public CarEntity(Integer id, double mileage, BigDecimal nettPrice, String maker, String carModel,
+      String version, Integer doors, String co2, BigDecimal grossPrice) {
+    super();
+    this.id = id;
+    this.mileage = mileage;
+    this.nettPrice = nettPrice;
+    this.maker = maker;
+    this.carModel = carModel;
+    this.version = version;
+    this.doors = doors;
+    this.co2 = co2;
+    this.grossPrice = grossPrice;
+  }
 
   public CarEntity() {}
 
@@ -110,7 +116,7 @@ public class CarEntity {
    * 
    * @return the net price of the car
    */
-  public double getNettPrice() {
+  public BigDecimal getNettPrice() {
     return nettPrice;
   }
 
@@ -119,7 +125,7 @@ public class CarEntity {
    * 
    * @param nettPrice the new net price of the car
    */
-  public void setNettPrice(double nettPrice) {
+  public void setNettPrice(BigDecimal nettPrice) {
     this.nettPrice = nettPrice;
   }
 
@@ -182,7 +188,7 @@ public class CarEntity {
    * 
    * @return the number of doors
    */
-  public int getDoors() {
+  public Integer getDoors() {
     return doors;
   }
 
@@ -191,7 +197,7 @@ public class CarEntity {
    * 
    * @param doors the new number of doors
    */
-  public void setDoors(int doors) {
+  public void setDoors(Integer doors) {
     this.doors = doors;
   }
 
@@ -218,7 +224,7 @@ public class CarEntity {
    * 
    * @return the gross price
    */
-  public double getGrossPrice() {
+  public BigDecimal getGrossPrice() {
     return grossPrice;
   }
 
@@ -227,7 +233,7 @@ public class CarEntity {
    * 
    * @param grossPrice the new gross price
    */
-  public void setGrossPrice(double grossPrice) {
+  public void setGrossPrice(BigDecimal grossPrice) {
     this.grossPrice = grossPrice;
   }
 
@@ -244,31 +250,27 @@ public class CarEntity {
   }
 
 
-  /**
-   * Constructor with all fields.
-   * 
-   * @param id the ID of the car
-   * @param mileage the mileage of the car
-   * @param nettPrice the net price of the car
-   * @param maker the maker of the car
-   * @param carModel the model of the car
-   * @param version the version of the car
-   * @param doors the number of doors
-   * @param co2 the CO2 emissions
-   * @param grossPrice the gross price
-   */
-  public CarEntity(Integer id, double mileage, double nettPrice, String maker, String carModel,
-      String version, int doors, String co2, double grossPrice) {
-    super();
-    this.id = id;
-    this.mileage = mileage;
-    this.nettPrice = nettPrice;
-    this.maker = maker;
-    this.carModel = carModel;
-    this.version = version;
-    this.doors = doors;
-    this.co2 = co2;
-    this.grossPrice = grossPrice;
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, mileage, nettPrice, maker, carModel, version, doors, co2, grossPrice);
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof CarEntity)) {
+      return false;
+    }
+    CarEntity other = (CarEntity) obj;
+    return Objects.equals(carModel, other.carModel) && Objects.equals(co2, other.co2)
+        && doors == other.doors && Objects.equals(grossPrice, other.grossPrice)
+        && Objects.equals(id, other.id) && Objects.equals(maker, other.maker)
+        && Double.doubleToLongBits(mileage) == Double.doubleToLongBits(other.mileage)
+        && Objects.equals(nettPrice, other.nettPrice) && Objects.equals(version, other.version);
+  }
+
+
 
 }
