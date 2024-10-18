@@ -3,10 +3,12 @@ package com.rupesh.assesment.carlease.reservation;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import com.rupesh.assesment.carlease.car.CarEntity;
 import com.rupesh.assesment.carlease.car.CarService;
 import com.rupesh.assesment.carlease.constants.Constants;
@@ -67,8 +69,8 @@ public class ReservationService {
    *
    * @return a List containing all ReservationEntity objects in the repository
    */
-  public ReservationEntity getAllReservation() {
-    return resRepo.findAll().orElseThrow(() -> new DataNotFoundException("Customer not found with id " + id));;
+  public List<ReservationEntity> getAllReservation() {
+    return resRepo.findAll();
   }
 
   /**
@@ -90,7 +92,7 @@ public class ReservationService {
    * @return an Optional containing the ReservationEntity if found, or null if not found
    */
   public Optional<ReservationEntity> getReservationById(Integer rId) {
-    return resRepo.findById(rId).orElseThrow(() -> new String("Customer not found with id " + id));
+    return resRepo.findById(rId);
   }
 
 }
